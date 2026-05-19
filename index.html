@@ -2,29 +2,277 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="description" content="ReactionMamba: Generating Short & Long Human Reaction Sequences">
+  <meta name="keywords" content="ReactionMamba, human motion generation, reaction generation, Mamba, VAE, human-human interaction">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ReactionMamba</title>
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <script defer src="./js/fontawesome.all.min.js"></script>
 </head>
-<body style="font-family: Arial, sans-serif; max-width: 900px; margin: 60px auto; line-height: 1.6; padding: 0 20px;">
 
-  <h1>ReactionMamba: Generating Short &amp; Long Human Reaction Sequences</h1>
+<body>
 
-  <p><strong>Accepted to FG 2026</strong></p>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h1 class="title is-1 publication-title">
+        ReactionMamba: Generating Short &amp; Long Human Reaction Sequences
+      </h1>
 
-  <p>
-    Hajra Anwar Beg, Baptiste Chopin, Hao Tang, Mohamed Daoudi
-  </p>
+      <h2 class="subtitle is-4">
+        Accepted to FG 2026
+      </h2>
 
-  <p>
-    <a href="https://arxiv.org/abs/2512.00208">arXiv</a> |
-    <span>Code (Coming soon)</span>
-  </p>
+      <div class="is-size-5 publication-authors">
+        <span>Hajra Anwar Beg</span>,
+        <span>Baptiste Chopin</span>,
+        <span>Hao Tang</span>,
+        <span>Mohamed Daoudi</span>
+      </div>
 
-  <hr>
+      <div class="is-size-6 publication-authors" style="margin-top: 10px;">
+        <span>Univ. Lille / IMT Nord Europe</span> &nbsp; | &nbsp;
+        <span>Hochschule Darmstadt</span> &nbsp; | &nbsp;
+        <span>Peking University</span>
+      </div>
 
-  <p>
-    Project page coming soon. More details, videos, and results will be added.
-  </p>
+      <!-- Replace ONLY the publication-links block with this -->
+
+<div class="column has-text-centered">
+  <div class="publication-links">
+
+    <span class="link-block">
+      <a href="https://arxiv.org/pdf/2512.00208"
+         class="external-link button is-normal is-rounded is-dark">
+        <span class="icon">
+          <i class="fas fa-file-pdf"></i>
+        </span>
+        <span>Paper</span>
+      </a>
+    </span>
+
+    <span class="link-block">
+      <a href="https://arxiv.org/abs/2512.00208"
+         class="external-link button is-normal is-rounded is-dark">
+        <span class="icon">
+          <i class="ai ai-arxiv"></i>
+        </span>
+        <span>arXiv</span>
+      </a>
+    </span>
+
+    <span class="link-block">
+      <a class="external-link button is-normal is-rounded is-dark"
+         style="pointer-events: none; cursor: default;">
+        <span class="icon">
+          <i class="fab fa-github"></i>
+        </span>
+        <span>Code Coming Soon</span>
+      </a>
+    </span>
+
+  </div>
+</div>
+    </div>
+
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Abstract</h2>
+    <div class="content">
+      <p>
+        We present <strong>ReactionMamba</strong>, a framework for generating short and long 3D human reaction
+        motions. ReactionMamba integrates a motion variational autoencoder with Mamba-based state-space
+        models to decode temporally consistent reactions. The model generates reaction sequences conditioned
+        on the observed actor motion and the initial pose of the reactor.
+      </p>
+      <p>
+        We evaluate ReactionMamba on <strong>NTU120-AS</strong>, <strong>Lindy Hop</strong>, and <strong>InterX</strong>,
+        demonstrating competitive performance in realism, diversity, and long-sequence generation, while
+        achieving substantial improvements in inference speed.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Method Overview</h2>
+
+    <div class="content">
+      <p>
+        ReactionMamba is a conditional VAE composed of a Mamba-based encoder, a conditioning module,
+        and a Mamba-based decoder. During training, the ground-truth reaction is encoded into a latent
+        representation. The decoder reconstructs the reaction from the latent code, the actor motion sequence,
+        and the initial reactor pose. At inference time, the encoder is removed and latent variables are sampled
+        to generate diverse reactions.
+      </p>
+    </div>
+
+    <div class="has-text-centered">
+      <img src="./images/OverviewReactionMamba.png"
+           alt="Overview of the ReactionMamba architecture"
+           style="max-width: 100%; border-radius: 10px;">
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Qualitative Comparisons</h2>
+
+    <div class="content">
+      <p>
+        We compare ReactionMamba against ground truth and representative baselines on short and long
+        human reaction sequences. Each row shows the same interaction using Ground Truth, ReactionMamba,
+        and one competing method.
+      </p>
+    </div>
+
+    <h3 class="title is-4">NTU120-AS — Shoot</h3>
+    <div class="columns is-vcentered">
+      <div class="column has-text-centered">
+        <img src="./videos/NtuAS/shoot_rm_gt/gt_shoot.gif" alt="Ground Truth shoot">
+        <p><strong>Ground Truth</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/NtuAS/shoot_rm_gt/rm_shoot.gif" alt="ReactionMamba shoot">
+        <p><strong>ReactionMamba</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/NtuAS/shoot_rm_remos/remos_shoot.gif" alt="ReMoS shoot">
+        <p><strong>ReMoS</strong></p>
+      </div>
+    </div>
+
+    <h3 class="title is-4">NTU120-AS — Cheers</h3>
+    <div class="columns is-vcentered">
+      <div class="column has-text-centered">
+        <img src="./videos/NtuAS/cheers_rm_gt/gt_cheers.gif" alt="Ground Truth cheers">
+        <p><strong>Ground Truth</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/NtuAS/cheers_rm_gt/rm_cheers.gif" alt="ReactionMamba cheers">
+        <p><strong>ReactionMamba</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/NtuAS/cheers_rm_interf/interf_cheers.gif" alt="InterFormer cheers">
+        <p><strong>InterFormer</strong></p>
+      </div>
+    </div>
+
+    <h3 class="title is-4">InterX — Chat</h3>
+    <div class="columns is-vcentered">
+      <div class="column has-text-centered">
+        <img src="./videos/INTERX/chat_rm_gt/gt_chat.gif" alt="Ground Truth chat">
+        <p><strong>Ground Truth</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/INTERX/chat_rm_gt/rm_chat.gif" alt="ReactionMamba chat">
+        <p><strong>ReactionMamba</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/INTERX/chat_rm_interf/interformer_chat.gif" alt="InterFormer chat">
+        <p><strong>InterFormer</strong></p>
+      </div>
+    </div>
+
+    <h3 class="title is-4">InterX — Dance</h3>
+    <div class="columns is-vcentered">
+      <div class="column has-text-centered">
+        <img src="./videos/INTERX/dance_rm_gt/gt_dance.gif" alt="Ground Truth dance">
+        <p><strong>Ground Truth</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/INTERX/dance_rm_gt/rm_dance.gif" alt="ReactionMamba dance">
+        <p><strong>ReactionMamba</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/INTERX/dance_rm_remos/remos_dance.gif" alt="ReMoS dance">
+        <p><strong>ReMoS</strong></p>
+      </div>
+    </div>
+
+    <h3 class="title is-4">Lindy Hop — Long Sequence</h3>
+    <div class="columns is-vcentered">
+      <div class="column has-text-centered">
+        <img src="./videos/Lindy_hop/ReactionMamba_VS_GT/gt_100_1.gif" alt="Ground Truth Lindy Hop">
+        <p><strong>Ground Truth</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/Lindy_hop/ReactionMamba_VS_GT/reaction_mamba_100_1.gif" alt="ReactionMamba Lindy Hop">
+        <p><strong>ReactionMamba</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/Lindy_hop/ReactionMamba_VS_Remos/remos_100_1.gif" alt="ReMoS Lindy Hop">
+        <p><strong>ReMoS</strong></p>
+      </div>
+    </div>
+
+    <h3 class="title is-4">Lindy Hop — Comparison with InterFormer</h3>
+    <div class="columns is-vcentered">
+      <div class="column has-text-centered">
+        <img src="./videos/Lindy_hop/ReactionMamba_VS_GT/gt_100_1.gif" alt="Ground Truth Lindy Hop">
+        <p><strong>Ground Truth</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/Lindy_hop/ReactionMamba_VS_Interf/reaction_mamba_100_1.gif" alt="ReactionMamba Lindy Hop">
+        <p><strong>ReactionMamba</strong></p>
+      </div>
+      <div class="column has-text-centered">
+        <img src="./videos/Lindy_hop/ReactionMamba_VS_Interf/interformer_100_1.gif" alt="InterFormer Lindy Hop">
+        <p><strong>InterFormer</strong></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Citation</h2>
+    <pre><code>@article{beg2026reactionmamba,
+  title={ReactionMamba: Generating Short &amp; Long Human Reaction Sequences},
+  author={Beg, Hajra Anwar and Chopin, Baptiste and Tang, Hao and Daoudi, Mohamed},
+  journal={arXiv preprint arXiv:2512.00208},
+  year={2026}
+}</code></pre>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Acknowledgements</h2>
+    <div class="content">
+      <p>
+        This project is supported by the France 2030 program – ANR-22-EXEN-0004
+        and by the National Research Center for Applied Cybersecurity ATHENE.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Project page for <strong>ReactionMamba</strong>.
+      </p>
+      <p>
+        Website template adapted from the
+        <a href="https://nerfies.github.io/">Nerfies project page</a>.
+      </p>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
+
